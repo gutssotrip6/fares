@@ -11,9 +11,9 @@ import { subscribeNewsletter } from "@/lib/tour-request.functions";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Fares Barket — Fils de Habiba | Billetterie" },
+      { title: "Fares Barket | Billetterie" },
       { name: "description", content: "Fares Barket en spectacle : « Fils de Habiba ». Dates, billetterie et demandes de tournée dans votre ville." },
-      { property: "og:title", content: "Fares Barket — Fils de Habiba" },
+      { property: "og:title", content: "Fares Barket" },
       { property: "og:description", content: "Dates du spectacle, billetterie et demandes de tournée dans votre ville." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
