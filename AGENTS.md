@@ -30,6 +30,6 @@ use the editor.
 <!-- LOVABLE:END -->
 
 - Keep confirmed show dates and their announcement URLs in a shared browser-safe data module; distinguish past performances from upcoming dates so expired events are never offered as bookable tickets.
-- City-interest requests share a Zod schema across the browser and a public server function; use insert-only database access so visitors cannot read other submissions.
+- City-interest requests and newsletter sign-ups are validated with Zod in public server functions and appended to a Google Sheet through the Apps Script webhook in `google-apps-script/tour-requests.gs` (`GOOGLE_SHEETS_WEBHOOK_URL`, kept out of git). The project no longer uses Supabase or a database.
 - Keep French and Arabic copy in a shared browser-safe language provider; hydrate saved language preferences on the client and synchronize document language and direction for accessible RTL rendering.
 - Serve opening photography through CDN asset pointers on a full-width stage with an independently positioned reservation overlay; this preserves transparent images and keeps the action visible on short screens.

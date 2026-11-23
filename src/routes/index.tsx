@@ -1,11 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState, type FormEvent } from "react";
 import portraitUrl from "@/assets/fares-hero.webp";
-import { supabase } from "@/integrations/supabase/client";
+import { useServerFn } from "@tanstack/react-start";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/lib/language";
 import { TourCityForm } from "@/components/tour-city-form";
 import { SHOW_DATES, isUpcomingShow, type ShowDate } from "@/lib/show-dates";
+import { subscribeNewsletter } from "@/lib/tour-request.functions";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -138,13 +139,18 @@ function Newsletter() {
   const { t } = useLanguage();
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "ok" | "error">("idle");
+  const subscribe = useServerFn(subscribeNewsletter);
 
   async function onSubmit(e: FormEvent) {
     e.preventDefault();
     setStatus("loading");
-    const { error } = await supabase.from("newsletter_subscribers").insert({ email: email.trim().toLowerCase() });
-    if (error && error.code !== "23505") setStatus("error");
-    else { setStatus("ok"); setEmail(""); }
+    try {
+      await subscribe({ data: { email } });
+      setStatus("ok");
+      setEmail("");
+    } catch {
+      setStatus("error");
+    }
   }
 
   return (
