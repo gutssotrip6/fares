@@ -118,9 +118,9 @@ function ShowDates({ shows }: { shows: ShowDate[] }) {
                 <bdi className="text-sm font-bold">{show.time}</bdi>
               </div>
               <div className="flex flex-1 flex-col gap-1 px-5 py-4 text-center break-words">
-                <div className="text-lg font-extrabold uppercase">{show.city}</div>
+                <div className="text-lg font-extrabold uppercase">{show.show}</div>
                 <div className="text-sm text-muted-foreground">{show.venue}</div>
-                <div className="text-sm">{show.show}</div>
+                <div className="text-sm">{show.city}</div>
               </div>
               {show.sourceUrl && (
                 <div className="px-5 pb-5">
