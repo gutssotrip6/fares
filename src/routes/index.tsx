@@ -27,6 +27,8 @@ export const Route = createFileRoute("/")({
 function Index() {
   const { language, setLanguage, t } = useLanguage();
   const shows = Route.useLoaderData();
+  // "Réserver" opens the ticket link of the next show that has one, else scrolls to the dates.
+  const reserveUrl = shows.find((show) => show.sourceUrl)?.sourceUrl;
   return (
     <div className="min-h-screen bg-background font-sans text-foreground">
       <header className="site-header sticky top-0 z-20 bg-primary text-primary-foreground">
@@ -49,7 +51,7 @@ function Index() {
           <img src={portraitUrl} alt={t.name} width={1920} height={1280} fetchPriority="high" className="hero-portrait" />
           <div className="portrait-actions">
             <Button asChild className="btn-pulse h-auto w-full rounded-sm bg-ink px-8 py-4 text-center text-sm font-extrabold uppercase tracking-widest text-ink-foreground shadow-none hover:bg-ink hover:opacity-90 sm:w-auto">
-              <a href="#dates"><span className="btn-label">{t.reserve}</span></a>
+              <a href={reserveUrl ?? "#dates"} {...(reserveUrl ? { target: "_blank", rel: "noopener noreferrer" } : {})}><span className="btn-label">{t.reserve}</span></a>
             </Button>
           </div>
         </div>
