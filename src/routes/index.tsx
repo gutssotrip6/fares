@@ -91,7 +91,7 @@ function ShowDates() {
   const { t } = useLanguage();
   if (!SHOW_TICKETING) {
     return (
-      <section id="dates" className="mx-auto max-w-6xl px-5 pt-20 pb-8">
+      <section id="dates" className="mx-auto max-w-3xl px-5 pt-20 pb-8 text-center">
         <h2 className="font-display-italic text-5xl text-primary md:text-6xl">{t.tickets}</h2>
         <p className="mt-6 text-xl font-semibold">{t.datesComingSoon}</p>
       </section>
@@ -100,8 +100,8 @@ function ShowDates() {
   const today = new Date().toISOString().slice(0, 10);
   return (
     <section id="dates" className="mx-auto max-w-6xl px-5 pt-20 pb-8">
-      <h2 className="font-display-italic text-5xl text-primary md:text-6xl">{t.tickets}</h2>
-      <p className="mt-2 text-muted-foreground">{t.confirmed}</p>
+      <h2 className="text-center font-display-italic text-5xl text-primary md:text-6xl">{t.tickets}</h2>
+      <p className="mt-2 text-center text-muted-foreground">{t.confirmed}</p>
       <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {SHOW_DATES.map((show, index) => {
           const d = formatShowDate(show, t.months);

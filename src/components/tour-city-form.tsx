@@ -30,9 +30,9 @@ export function TourCityForm() {
   }
 
   return (
-    <section id="city-request" className="mx-auto max-w-6xl px-5 pb-20 pt-8">
+    <section id="city-request" className="mx-auto max-w-3xl px-5 pb-20 pt-8 text-center">
       <h2 className="font-display-italic text-4xl text-primary sm:text-5xl md:text-6xl">{t.soon}</h2>
-      <p className="mt-4 max-w-2xl text-lg text-muted-foreground">
+      <p className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground">
         {t.tourIntro}
       </p>
       {status === "success" ? (
