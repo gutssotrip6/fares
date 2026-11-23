@@ -80,6 +80,7 @@ function Index() {
         </div>
         <a href="mailto:faresbarkettpro@gmail.com" dir="ltr" className="mb-4 block font-semibold hover:text-accent">faresbarkettpro@gmail.com</a>
         © {new Date().getFullYear()} {t.name} — {t.rights}
+        <p dir="ltr" className="mt-3 text-xs tracking-wide opacity-70">Made by © Ad Technologies</p>
       </footer>
     </div>
   );
