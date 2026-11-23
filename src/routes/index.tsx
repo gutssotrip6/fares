@@ -71,8 +71,9 @@ function Index() {
         <div className="mb-4 flex justify-center gap-6 font-semibold uppercase tracking-widest">
           <a href="https://www.instagram.com/faresbarkett" target="_blank" rel="noopener noreferrer" className="hover:text-accent">{t.instagram}</a>
           <a href="https://www.youtube.com/@faresbarkett" target="_blank" rel="noopener noreferrer" className="hover:text-accent">{t.youtube}</a>
-          <a href="https://www.facebook.com/fares.barket.2025/" target="_blank" rel="noopener noreferrer" className="hover:text-accent">{t.facebook}</a>
+          <a href="https://www.facebook.com/faresbarkett/" target="_blank" rel="noopener noreferrer" className="hover:text-accent">{t.facebook}</a>
         </div>
+        <a href="mailto:faresbarkettpro@gmail.com" dir="ltr" className="mb-4 block font-semibold hover:text-accent">faresbarkettpro@gmail.com</a>
         © {new Date().getFullYear()} {t.name} — {t.rights}
       </footer>
     </div>
