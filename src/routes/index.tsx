@@ -93,7 +93,7 @@ function ShowDates() {
     return (
       <section id="dates" className="mx-auto max-w-3xl px-5 pt-20 pb-8 text-center">
         <h2 className="font-display-italic text-5xl text-primary md:text-6xl">{t.tickets}</h2>
-        <p className="mt-6 text-xl font-semibold">{t.datesComingSoon}</p>
+        <p className="mt-8 inline-block rounded-sm border border-primary/20 bg-primary/5 px-8 py-5 text-xl font-semibold text-primary shadow-sm">{t.datesComingSoon}</p>
       </section>
     );
   }
