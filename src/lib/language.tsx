@@ -3,7 +3,7 @@ import { createContext, useContext, useEffect, useState, type ReactNode } from "
 const fr = {
   name: "Fares Barket", dates: "Dates", fares: "Fares", newsletter: "Newsletter", tickets: "Billetterie",
   reserve: "Réserver mes places", poster: "Affiche du spectacle Fils de Habiba de Fares Barket",
-  confirmed: "Les dates confirmées des spectacles de Fares Barket.", ticket: "Billets", past: "Date passée",
+  confirmed: "Les dates confirmées des spectacles de Fares Barket.", ticket: "Réserver", past: "Date passée",
   datesComingSoon: "Les prochaines dates arrivent bientôt.",
   bioTitle: "Qui est Fares ?",
   bio: "Révélé sur les réseaux par ses sketchs sur la famille et le quotidien, Fares Barket s'est imposé comme l'une des voix montantes de l'humour. Avec « Fils de Habiba » (ولد حبيبة), il rend un hommage drôle et tendre aux mamans qui nous couvent bien trop longtemps — entre harira, tricot et remarques bien senties.",
@@ -25,7 +25,7 @@ const fr = {
 const ar: typeof fr = {
   name: "فارس باركت", dates: "المواعيد", fares: "فارس", newsletter: "النشرة البريدية", tickets: "التذاكر",
   reserve: "احجز تذاكرك", poster: "ملصق عرض ولد حبيبة لفارس باركت",
-  confirmed: "المواعيد المؤكدة لعروض فارس باركت.", ticket: "التذاكر", past: "عرض سابق",
+  confirmed: "المواعيد المؤكدة لعروض فارس باركت.", ticket: "احجز", past: "عرض سابق",
   datesComingSoon: "المواعيد القادمة قريباً.",
   bioTitle: "من هو فارس؟",
   bio: "برز فارس باركت على مواقع التواصل الاجتماعي من خلال مقاطعه الكوميدية عن العائلة والحياة اليومية، ليصبح أحد الأسماء الصاعدة في عالم الكوميديا. في عرضه «ولد حبيبة»، يقدم تحية مليئة بالضحك والحنان للأمهات اللواتي يفرطن في رعايتنا، بين الحريرة والحياكة والتعليقات اللاذعة.",
