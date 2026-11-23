@@ -12,9 +12,9 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "Fares Barket | Billetterie" },
-      { name: "description", content: "Fares Barket en spectacle : « Fils de Habiba ». Dates, billetterie et demandes de tournée dans votre ville." },
+      { name: "description", content: "Site officiel de Fares Barket, humoriste. Retrouvez les prochaines dates de spectacle, la billetterie et demandez sa venue dans votre ville." },
       { property: "og:title", content: "Fares Barket" },
-      { property: "og:description", content: "Dates du spectacle, billetterie et demandes de tournée dans votre ville." },
+      { property: "og:description", content: "Site officiel de Fares Barket, humoriste. Retrouvez les prochaines dates de spectacle, la billetterie et demandez sa venue dans votre ville." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
