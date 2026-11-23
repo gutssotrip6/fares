@@ -1,4 +1,4 @@
-// Entry point for hosts that expect server.js (e.g. Hostinger's Express preset).
+// Entry point for hosts that need an entry file (e.g. Hostinger). Not named server.js: Nitro would bundle that as its own server entry.
 // Loads optional env files, then starts the built server from `npm run build:node`.
 import { existsSync } from "node:fs";
 
