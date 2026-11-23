@@ -49,7 +49,12 @@ export const getUpcomingShows = createServerFn({ method: "GET" }).handler(async 
   }
 
   const today = new Date().toISOString().slice(0, 10);
-  return cache.shows
-    .filter((show) => show.date >= today)
-    .sort((a, b) => (a.date + a.time).localeCompare(b.date + b.time));
+  // Upcoming shows first (soonest first), then past shows (most recent first).
+  const byDate = (a: ShowDate, b: ShowDate) => (a.date + a.time).localeCompare(b.date + b.time);
+  const upcoming = cache.shows.filter((show) => show.date >= today).sort(byDate);
+  const past = cache.shows.filter((show) => show.date < today).sort((a, b) => byDate(b, a));
+  return [
+    ...upcoming.map((show) => ({ ...show, past: false })),
+    ...past.map((show) => ({ ...show, past: true })),
+  ];
 });

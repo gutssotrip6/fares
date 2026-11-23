@@ -28,7 +28,7 @@ function Index() {
   const { language, setLanguage, t } = useLanguage();
   const shows = Route.useLoaderData();
   // "Réserver" opens the ticket link of the next show that has one, else scrolls to the dates.
-  const reserveUrl = shows.find((show) => show.sourceUrl)?.sourceUrl;
+  const reserveUrl = shows.find((show) => !show.past && show.sourceUrl)?.sourceUrl;
   return (
     <div className="min-h-screen bg-background font-sans text-foreground">
       <header className="site-header sticky top-0 z-20 bg-primary text-primary-foreground">
@@ -90,8 +90,8 @@ function formatShowDate(show: ShowDate, months: string[]) {
   return { day, month: months[Number(month) - 1] ?? "", year };
 }
 
-// Upcoming shows come from the "Dates" tab of the Google Sheet (see show-dates.functions.ts).
-function ShowDates({ shows }: { shows: ShowDate[] }) {
+// Shows come from the "Dates" tab of the Google Sheet (see show-dates.functions.ts).
+function ShowDates({ shows }: { shows: (ShowDate & { past: boolean })[] }) {
   const { t } = useLanguage();
   if (shows.length === 0) {
     return (
@@ -122,7 +122,11 @@ function ShowDates({ shows }: { shows: ShowDate[] }) {
                 <div className="text-sm text-muted-foreground">{show.venue}</div>
                 <div className="text-sm">{show.city}</div>
               </div>
-              {show.sourceUrl && (
+              {show.past ? (
+                <div className="px-5 pb-5">
+                  <span className="block cursor-not-allowed rounded-sm bg-muted-foreground/40 px-4 py-3 text-center text-sm font-bold uppercase tracking-widest text-white">{t.past}</span>
+                </div>
+              ) : show.sourceUrl && (
                 <div className="px-5 pb-5">
                   <a href={show.sourceUrl} target="_blank" rel="noopener noreferrer" className="block rounded-sm bg-primary px-4 py-3 text-center text-sm font-bold uppercase tracking-widest text-primary-foreground hover:bg-royal-deep">{t.ticket}</a>
                 </div>
