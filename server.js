@@ -6,4 +6,7 @@ for (const file of [".env", ".env.local"]) {
   if (existsSync(file)) process.loadEnvFile(file);
 }
 
-await import("./.output/server/index.mjs");
+import("./.output/server/index.mjs").catch((error) => {
+  console.error("Failed to start: run `npm run build:node` first.", error);
+  process.exit(1);
+});
