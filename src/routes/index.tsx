@@ -5,7 +5,8 @@ import { useServerFn } from "@tanstack/react-start";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/lib/language";
 import { TourCityForm } from "@/components/tour-city-form";
-import { SHOW_DATES, isUpcomingShow, type ShowDate } from "@/lib/show-dates";
+import type { ShowDate } from "@/lib/show-dates";
+import { getUpcomingShows } from "@/lib/show-dates.functions";
 import { subscribeNewsletter } from "@/lib/tour-request.functions";
 
 export const Route = createFileRoute("/")({
@@ -19,11 +20,13 @@ export const Route = createFileRoute("/")({
       { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
+  loader: () => getUpcomingShows(),
   component: Index,
 });
 
 function Index() {
   const { language, setLanguage, t } = useLanguage();
+  const shows = Route.useLoaderData();
   return (
     <div className="min-h-screen bg-background font-sans text-foreground">
       <header className="site-header sticky top-0 z-20 bg-primary text-primary-foreground">
@@ -52,7 +55,7 @@ function Index() {
         </div>
       </section>
 
-      <ShowDates />
+      <ShowDates shows={shows} />
 
       <TourCityForm />
 
@@ -85,12 +88,10 @@ function formatShowDate(show: ShowDate, months: string[]) {
   return { day, month: months[Number(month) - 1] ?? "", year };
 }
 
-// Set to true to bring back the ticketing list (dates + ticket links from SHOW_DATES).
-const SHOW_TICKETING = false;
-
-function ShowDates() {
+// Upcoming shows come from the "Dates" tab of the Google Sheet (see show-dates.functions.ts).
+function ShowDates({ shows }: { shows: ShowDate[] }) {
   const { t } = useLanguage();
-  if (!SHOW_TICKETING) {
+  if (shows.length === 0) {
     return (
       <section id="dates" className="mx-auto max-w-3xl px-5 pt-20 pb-8 text-center">
         <h2 className="font-display-italic text-5xl text-primary md:text-6xl">{t.tickets}</h2>
@@ -98,17 +99,15 @@ function ShowDates() {
       </section>
     );
   }
-  const today = new Date().toISOString().slice(0, 10);
   return (
     <section id="dates" className="mx-auto max-w-6xl px-5 pt-20 pb-8">
       <h2 className="text-center font-display-italic text-5xl text-primary md:text-6xl">{t.tickets}</h2>
       <p className="mt-2 text-center text-muted-foreground">{t.confirmed}</p>
-      <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {SHOW_DATES.map((show, index) => {
+      <ul className="mt-10 flex flex-wrap justify-center gap-4">
+        {shows.map((show) => {
           const d = formatShowDate(show, t.months);
-          const upcoming = isUpcomingShow(show, today);
           return (
-            <li key={show.date + show.time + show.city} className="flex flex-col overflow-hidden rounded-sm border border-border bg-card">
+            <li key={show.date + show.time + show.city} className="flex w-full flex-col overflow-hidden rounded-sm border border-border bg-card sm:w-80">
               <div className="flex items-center justify-between gap-3 bg-primary px-5 py-3 text-primary-foreground">
                 <div className="flex items-baseline gap-2">
                   <span className="text-3xl font-extrabold leading-none">{d.day}</span>
@@ -117,17 +116,15 @@ function ShowDates() {
                 <bdi className="text-sm font-bold">{show.time}</bdi>
               </div>
               <div className="flex flex-1 flex-col gap-1 px-5 py-4 break-words">
-                <div className="text-lg font-extrabold uppercase">{t.cities[index] ?? show.city}</div>
-                <div className="text-sm text-muted-foreground">{t.venues[index] ?? show.venue}</div>
-                <div className="text-sm">{t.shows[index] ?? show.show}</div>
+                <div className="text-lg font-extrabold uppercase">{show.city}</div>
+                <div className="text-sm text-muted-foreground">{show.venue}</div>
+                <div className="text-sm">{show.show}</div>
               </div>
-              <div className="px-5 pb-5">
-                {upcoming ? (
+              {show.sourceUrl && (
+                <div className="px-5 pb-5">
                   <a href={show.sourceUrl} target="_blank" rel="noopener noreferrer" className="block rounded-sm bg-primary px-4 py-3 text-center text-sm font-bold uppercase tracking-widest text-primary-foreground hover:bg-royal-deep">{t.ticket}</a>
-                ) : (
-                  <span className="block rounded-sm border border-border px-4 py-3 text-center text-sm font-bold uppercase tracking-widest text-muted-foreground">{t.past}</span>
-                )}
-              </div>
+                </div>
+              )}
             </li>
           );
         })}
