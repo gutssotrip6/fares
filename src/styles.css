@@ -198,6 +198,11 @@
     height: clamp(400px, calc(100svh - 132px), 1100px);
   }
 
+  .hero-portrait {
+    object-fit: contain;
+    object-position: 50% 100%;
+  }
+
   .portrait-actions {
     max-width: none;
     bottom: 40px;
